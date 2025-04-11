@@ -4,16 +4,23 @@ const dashboard = document.getElementById("dashboard");
 
 function printAction(val) {
   if (val === '+/-') {
-    let firstDigit = dashboard.value[0]
+    let firstDigit = dashboard.value[0];
     if (firstDigit === '-') {
-      dashboard.value = dashboard.value.slice(1, dashboard.value.length)
+      dashboard.value = dashboard.value.slice(1);
     } else {
-      dashboard.value = '-' + dashboard.value
+      dashboard.value = '-' + dashboard.value;
     }
-  } else if (actions.includes(dashboard.value[dashboard.value.length - 1])
-    || dashboard.value.length === 0) {
   } else {
-    dashboard.value += val
+    const lastChar = dashboard.value[dashboard.value.length - 1];
+    if (actions.includes(lastChar) && actions.includes(val)) {
+      return;
+    }
+
+    if (dashboard.value.length === 0 && actions.includes(val)) {
+      return;
+    }
+
+    dashboard.value += val;
   }
 }
 
